@@ -1,1 +1,1 @@
-rootProject.name = "tic-tac-toe"
+rootProject.name = "tic-tac-toe_v2.1"
