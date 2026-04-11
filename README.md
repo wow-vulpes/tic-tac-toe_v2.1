@@ -23,6 +23,7 @@
 ### Технологии:
 
 * Java 18
+* Gradle (Kotlin DSL)
 * Spring Boot
 * Spring Security
 * Spring Data JPA / Hibernate
