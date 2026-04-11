@@ -23,7 +23,7 @@
 
 ### Технологии:
 
-* Java
+* Java 18
 * Spring Boot
 * Spring Security
 * JWT (io.jsonwebtoken)
