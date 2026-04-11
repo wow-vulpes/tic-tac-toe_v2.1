@@ -7,17 +7,16 @@
 
 ### Основной функционал:
 
-* Реализована JWT-аутентификация (access + refresh токены)
-* Добавлена поддержка ролей (USER)
+* Реализована JWT-аутентификация
+* Добавлена поддержка ролей
 * Настроена безопасность через Spring Security
-* Реализованы endpoint’ы для авторизации и обновления токенов
-* Подключена PostgreSQL через Spring Data JPA / Hibernate
+* Подключена PostgreSQL через Spring Data JPA/Hibernate
 
 ### Игровая логика:
 
 * Создание и хранение игр
 * История завершённых игр
-* Таблица лидеров (топ-N игроков по win rate)
+* Таблица лидеров
 
 ---
 
@@ -26,9 +25,10 @@
 * Java 18
 * Spring Boot
 * Spring Security
-* JWT (io.jsonwebtoken)
-* PostgreSQL
 * Spring Data JPA / Hibernate
+* PostgreSQL
+* REST API
+* JWT Auth
 
 ---
 
