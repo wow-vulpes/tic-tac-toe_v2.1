@@ -16,7 +16,7 @@ public class JwtUtil {
             throw new IllegalArgumentException("There're no claims");
         }
 
-        UUID userId = (UUID) claims.get("userId");
+        UUID userId = UUID.fromString(claims.get("userId", String.class));
 
         Object rolesRaw = claims.get("roles");
 

@@ -31,12 +31,20 @@ public class UserService implements UserServiceInterface {
 
     @Override
     public User getUserByLogin(String login) {
+        if (login == null){
+            throw new IllegalArgumentException("There's no login");
+        }
+
         Optional<UserEntity> user = userRepository.findByLogin(login);
         return user.map(userMapper::toUser).orElse(null);
     }
 
     @Override
     public User getUserById(UUID id) {
+        if (id == null){
+            throw new IllegalArgumentException("There's no ID");
+        }
+
         UserEntity user = userRepository.findById(id).
                 orElseThrow(() -> new RuntimeException("There's no user with that ID"));
         return userMapper.toUser(user);

@@ -22,39 +22,35 @@ public class AuthController {
     private final UserService userService;
     private final WebMapper mapper;
 
-    public AuthController(AuthService authService, UserService userService, WebMapper mapper){
+    public AuthController(AuthService authService, UserService userService, WebMapper mapper) {
         this.authService = authService;
         this.userService = userService;
         this.mapper = mapper;
     }
 
     @PostMapping("/sign-up")
-    public boolean signUp(@RequestBody SignUpRequest request){
+    public boolean signUp(@RequestBody SignUpRequest request) {
         return authService.register(request);
     }
 
     @PostMapping("/sign-in")
-    public JwtResponse signIn(@RequestBody JwtRequest request){
+    public JwtResponse signIn(@RequestBody JwtRequest request) {
         return authService.authorize(request);
     }
 
     @PostMapping("/access-token")
-    public JwtResponse refreshAccessToken(@RequestBody JwtRefreshRequest request){
+    public JwtResponse refreshAccessToken(@RequestBody JwtRefreshRequest request) {
         return authService.updateAccessToken(request.refreshToken());
     }
 
     @PostMapping("/refresh-token")
-    public JwtResponse refreshRefreshToken(@RequestBody JwtRefreshRequest request){
-        String refreshToken = request.refreshToken();
-        if (refreshToken == null || refreshToken.isBlank()){
-            throw new IllegalArgumentException("There's no refresh token");
-        }
+    public JwtResponse refreshRefreshToken(@RequestBody JwtRefreshRequest request) {
+        return authService.updateRefreshToken(request.refreshToken());
 
-        return authService.updateRefreshToken(refreshToken);
     }
 
     @GetMapping("/current-user")
-    public DtoUser getCurrentUser(){
+    public DtoUser getCurrentUser() {
         JwtAuthentication authentication = authService.getJwtAuthentication();
         User user = userService.getUserById((UUID) authentication.getPrincipal());
         return mapper.toDtoUser(user);

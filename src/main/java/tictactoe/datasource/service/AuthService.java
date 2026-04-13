@@ -41,7 +41,7 @@ public class AuthService {
     }
 
     public JwtResponse authorize(JwtRequest request) {
-        if(request == null || request.login() == null || request.password() == null){
+        if (request == null || request.login() == null || request.password() == null) {
             throw new IllegalArgumentException("There're no login and password");
         }
 
@@ -52,9 +52,9 @@ public class AuthService {
         return new JwtResponse("Bearer", accessToken, refreshToken);
     }
 
-    public JwtResponse updateAccessToken(String refreshToken){
-        if(jwtProvider.validateRefreshToken(refreshToken)){
-            UUID userId = jwtProvider.getClaims(refreshToken).get("userId", UUID.class);
+    public JwtResponse updateAccessToken(String refreshToken) {
+        if (jwtProvider.validateRefreshToken(refreshToken)) {
+            UUID userId = UUID.fromString(jwtProvider.getClaims(refreshToken).get("userId", String.class));
             User user = userService.getUserById(userId);
 
             String accessToken = jwtProvider.generateAccessToken(user);
@@ -65,9 +65,9 @@ public class AuthService {
         throw new IllegalArgumentException("Incorrect refresh token");
     }
 
-    public JwtResponse updateRefreshToken(String refreshToken){
-        if(jwtProvider.validateRefreshToken(refreshToken)){
-            UUID userId = jwtProvider.getClaims(refreshToken).get("userId", UUID.class);
+    public JwtResponse updateRefreshToken(String refreshToken) {
+        if (jwtProvider.validateRefreshToken(refreshToken)) {
+            UUID userId = UUID.fromString(jwtProvider.getClaims(refreshToken).get("userId", String.class));
             User user = userService.getUserById(userId);
 
             String accessToken = jwtProvider.generateAccessToken(user);
@@ -79,7 +79,7 @@ public class AuthService {
         throw new IllegalArgumentException("Incorrect refresh token");
     }
 
-    public JwtAuthentication getJwtAuthentication(){
+    public JwtAuthentication getJwtAuthentication() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication instanceof JwtAuthentication jwtAuthentication) {
@@ -89,10 +89,10 @@ public class AuthService {
         throw new IllegalStateException("There's no JwtAuthentication in SecurityContext");
     }
 
-    private User validateUser(String login, String password){
+    private User validateUser(String login, String password) {
         User user = userService.getUserByLogin(login);
 
-        if(user == null || !encoder.matches(password, user.getPassword())){
+        if (user == null || !encoder.matches(password, user.getPassword())) {
             throw new IllegalArgumentException("Incorrect login or password");
         }
 
