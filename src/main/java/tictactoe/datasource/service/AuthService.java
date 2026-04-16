@@ -5,7 +5,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import tictactoe.domain.model.User;
 import org.springframework.stereotype.Service;
-import tictactoe.domain.model.gamecomponents.Role;
+import tictactoe.domain.model.Role;
 import tictactoe.security.jwt.JwtAuthentication;
 import tictactoe.security.jwt.JwtProvider;
 import tictactoe.web.model.SignUpRequest;
@@ -58,8 +58,9 @@ public class AuthService {
             User user = userService.getUserById(userId);
 
             String accessToken = jwtProvider.generateAccessToken(user);
+            String newRefreshToken = jwtProvider.generateRefreshToken(user);
 
-            return new JwtResponse("Bearer", accessToken, refreshToken);
+            return new JwtResponse("Bearer", accessToken, newRefreshToken);
         }
 
         throw new IllegalArgumentException("Incorrect refresh token");

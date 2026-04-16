@@ -6,6 +6,7 @@ import tictactoe.datasource.model.gamecomponents.GameStateEmbeddable;
 import tictactoe.datasource.model.gamecomponents.PlayerEmbeddable;
 import jakarta.persistence.*;
 
+import java.time.Instant;
 import java.util.UUID;
 
 @Entity
@@ -13,6 +14,8 @@ import java.util.UUID;
 public class GameEntity {
     @Id
     private UUID id;
+
+    private Instant createdAt;
 
     @Convert(converter = FieldConverter.class)
     @Column(name = "game", nullable = false, columnDefinition = "TEXT")
@@ -87,5 +90,13 @@ public class GameEntity {
 
     public void setPlayer2(PlayerEmbeddable player2) {
         this.player2 = player2;
+    }
+
+    public void setCreatedAt(Instant createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Instant getCreatedAt() {
+        return createdAt;
     }
 }

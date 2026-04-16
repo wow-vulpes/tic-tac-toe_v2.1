@@ -1,7 +1,5 @@
 package tictactoe.domain.model;
 
-import tictactoe.domain.model.gamecomponents.Role;
-
 import java.util.Set;
 import java.util.UUID;
 

@@ -2,10 +2,14 @@ package tictactoe.domain.model;
 
 import tictactoe.domain.model.gamecomponents.*;
 
+import java.time.Instant;
 import java.util.UUID;
 
 public class Game {
     private UUID id;
+
+    private Instant createdAt;
+
     private GameField field;
     private GameState state;
     private GameMode mode;
@@ -73,5 +77,13 @@ public class Game {
 
     public void setField(GameField field) {
         this.field = field;
+    }
+
+    public void setCreatedAt(Instant createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Instant getCreatedAt() {
+        return createdAt;
     }
 }

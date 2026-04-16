@@ -4,8 +4,7 @@ import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.stereotype.Component;
-import tictactoe.domain.model.gamecomponents.Role;
+import tictactoe.domain.model.Role;
 
 import java.util.*;
 

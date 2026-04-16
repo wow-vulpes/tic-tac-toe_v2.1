@@ -2,12 +2,15 @@ package tictactoe.web.controller;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import tictactoe.domain.model.Game;
+import tictactoe.domain.model.gamecomponents.LeaderBoard;
 import tictactoe.domain.service.GameServiceInterface;
 import org.springframework.web.bind.annotation.*;
 import tictactoe.web.mapper.WebMapper;
 import tictactoe.web.model.CreateRequest;
 import tictactoe.web.model.MoveRequest;
 import tictactoe.web.model.DtoGame;
+import tictactoe.web.model.gamecomponents.DtoLeaderBoard;
+
 import java.util.List;
 import java.util.UUID;
 
@@ -50,5 +53,16 @@ public class GameController {
     public DtoGame getCurrentSession(@PathVariable("id") UUID gameId){
         Game currentGame = gameService.getCurrentGame(gameId);
         return mapper.toDtoSession(currentGame);
+    }
+
+    @GetMapping("/finished")
+    public List<UUID> getFinishedGames(@AuthenticationPrincipal UUID playerId){
+        return gameService.getFinishedGames(playerId);
+    }
+
+    @GetMapping("/leader-board")
+    public List<DtoLeaderBoard> getLeaderBoard(@AuthenticationPrincipal UUID playerId, @RequestParam(defaultValue = "3") int limit){
+        List<LeaderBoard> leaderBoard = gameService.getLeaderBoard(limit);
+        return mapper.toDtoLeaderBoard(leaderBoard);
     }
 }

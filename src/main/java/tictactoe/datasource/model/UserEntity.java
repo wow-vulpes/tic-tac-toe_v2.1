@@ -1,7 +1,7 @@
 package tictactoe.datasource.model;
 
 import jakarta.persistence.*;
-import tictactoe.web.model.gamecomponents.DtoRole;
+import tictactoe.web.model.DtoRole;
 
 import java.util.HashSet;
 import java.util.Set;

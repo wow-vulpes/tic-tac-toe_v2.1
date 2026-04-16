@@ -2,7 +2,7 @@ package tictactoe.security.jwt;
 
 import io.jsonwebtoken.Claims;
 import org.springframework.stereotype.Component;
-import tictactoe.domain.model.gamecomponents.Role;
+import tictactoe.domain.model.Role;
 
 import java.util.Collection;
 import java.util.Set;

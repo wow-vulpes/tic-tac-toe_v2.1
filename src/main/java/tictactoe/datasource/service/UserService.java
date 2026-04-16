@@ -1,17 +1,13 @@
 package tictactoe.datasource.service;
 
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import tictactoe.datasource.mapper.UserMapper;
 import tictactoe.datasource.model.UserEntity;
 import tictactoe.datasource.repository.UserRepository;
 import tictactoe.domain.model.User;
-import tictactoe.domain.model.gamecomponents.Role;
 import tictactoe.domain.service.UserServiceInterface;
 import org.springframework.stereotype.Service;
-import tictactoe.web.model.gamecomponents.DtoRole;
 
 import java.util.Optional;
-import java.util.Set;
 import java.util.UUID;
 
 @Service
@@ -31,10 +27,6 @@ public class UserService implements UserServiceInterface {
 
     @Override
     public User getUserByLogin(String login) {
-        if (login == null){
-            throw new IllegalArgumentException("There's no login");
-        }
-
         Optional<UserEntity> user = userRepository.findByLogin(login);
         return user.map(userMapper::toUser).orElse(null);
     }

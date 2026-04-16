@@ -5,15 +5,19 @@ import tictactoe.web.model.gamecomponents.DtoGameMode;
 import tictactoe.web.model.gamecomponents.DtoGameState;
 import tictactoe.web.model.gamecomponents.DtoPlayer;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class DtoGame {
-    UUID gameId;
-    DtoGameField field;
-    DtoGameState state;
-    DtoGameMode mode;
-    DtoPlayer player1;
-    DtoPlayer player2;
+    private UUID gameId;
+
+    private LocalDateTime createdAt;
+
+    private DtoGameField field;
+    private DtoGameState state;
+    private DtoGameMode mode;
+    private DtoPlayer player1;
+    private DtoPlayer player2;
 
     public DtoGame(){
 
@@ -65,5 +69,13 @@ public class DtoGame {
 
     public void setPlayer2(DtoPlayer player2) {
         this.player2 = player2;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 }

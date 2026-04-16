@@ -3,8 +3,8 @@ package tictactoe.datasource.mapper;
 import tictactoe.datasource.model.UserEntity;
 import tictactoe.domain.model.User;
 import org.springframework.stereotype.Component;
-import tictactoe.domain.model.gamecomponents.Role;
-import tictactoe.web.model.gamecomponents.DtoRole;
+import tictactoe.domain.model.Role;
+import tictactoe.web.model.DtoRole;
 
 import java.util.Set;
 import java.util.stream.Collectors;

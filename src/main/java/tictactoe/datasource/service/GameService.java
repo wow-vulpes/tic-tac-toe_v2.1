@@ -2,14 +2,14 @@ package tictactoe.datasource.service;
 
 import tictactoe.datasource.mapper.GameMapper;
 import tictactoe.datasource.model.GameEntity;
-import tictactoe.datasource.model.gamecomponents.DtoGameMode;
+import tictactoe.datasource.model.gamecomponents.DtoLeaderBoard;
 import tictactoe.datasource.repository.GameRepository;
 import tictactoe.domain.model.*;
 import tictactoe.domain.model.gamecomponents.*;
 import tictactoe.domain.service.GameServiceInterface;
 import org.springframework.stereotype.Service;
-import tictactoe.web.model.gamecomponents.DtoGameState;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 
@@ -33,6 +33,7 @@ public class GameService implements GameServiceInterface {
         game.setState(new GameState(State.PLAYER_TURN, game.getPlayer1().getPlayerId()));
         game.setPlayer2(new Player(DefaultValues.AI_ID, DefaultValues.Token.O));
 
+        game.setCreatedAt(Instant.now());
         saveGame(game);
         return game;
     }
@@ -42,6 +43,7 @@ public class GameService implements GameServiceInterface {
         game.setMode(GameMode.PVP);
         game.setState(new GameState(State.WAITING_FOR_PLAYERS));
 
+        game.setCreatedAt(Instant.now());
         saveGame(game);
         return game;
     }
@@ -113,6 +115,17 @@ public class GameService implements GameServiceInterface {
 
         saveGame(currentGame);
         return currentGame;
+    }
+
+    @Override
+    public List<UUID> getFinishedGames(UUID playerId) {
+        return gameRepository.findFinishedGames(playerId);
+    }
+
+    @Override
+    public List<LeaderBoard> getLeaderBoard(int N){
+        List<DtoLeaderBoard> leaderBoard = gameRepository.findLeadersStats(N);
+        return gameMapper.toLeaderBoard(leaderBoard);
     }
 
     // метод получения следующего хода текущей игры алгоритмом «Минимакс»;

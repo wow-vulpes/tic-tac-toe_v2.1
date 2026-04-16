@@ -7,7 +7,8 @@ import org.springframework.stereotype.Component;
 import tictactoe.web.model.*;
 import tictactoe.web.model.gamecomponents.*;
 
-import java.util.Arrays;
+import java.time.ZoneId;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -38,7 +39,17 @@ public class WebMapper {
             gameResponse.setPlayer2(new DtoPlayer(game.getPlayer2().getPlayerId(), player2Token));
         }
 
+        gameResponse.setCreatedAt(game.getCreatedAt()
+                .atZone(ZoneId.of("Europe/Moscow"))
+                .toLocalDateTime());
+
         return gameResponse;
+    }
+
+    public List<DtoLeaderBoard> toDtoLeaderBoard(List<LeaderBoard> leaderBoard){
+        return leaderBoard.stream()
+                .map(lb -> new DtoLeaderBoard(lb.userId(), lb.winRate()))
+                .toList();
     }
 
     private Set<DtoRole> toDtoRoles(Set<Role> roles){

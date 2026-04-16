@@ -2,6 +2,7 @@ package tictactoe.domain.service;
 
 import tictactoe.domain.model.Game;
 import tictactoe.domain.model.gamecomponents.GameMode;
+import tictactoe.domain.model.gamecomponents.LeaderBoard;
 import tictactoe.domain.model.gamecomponents.Move;
 
 import java.util.List;
@@ -17,4 +18,8 @@ public interface GameServiceInterface {
     Game joinTheGame(UUID gameId, UUID playerId);
 
     Game getCurrentGame(UUID gameId);
+
+    List<UUID> getFinishedGames(UUID playerId);
+
+    List<LeaderBoard> getLeaderBoard(int N);
 }

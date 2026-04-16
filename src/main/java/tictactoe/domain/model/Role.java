@@ -1,4 +1,4 @@
-package tictactoe.domain.model.gamecomponents;
+package tictactoe.domain.model;
 
 import org.springframework.security.core.GrantedAuthority;
 

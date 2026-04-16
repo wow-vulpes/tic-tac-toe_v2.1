@@ -6,6 +6,8 @@ import tictactoe.domain.model.*;
 import tictactoe.domain.model.gamecomponents.*;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class GameMapper {
     // GAME
@@ -21,6 +23,8 @@ public class GameMapper {
         if (game.getPlayer2() != null){
             gameEntity.setPlayer2(toPlayerEmbeddable(game.getPlayer2()));
         }
+
+        gameEntity.setCreatedAt(game.getCreatedAt());
 
         return gameEntity;
     }
@@ -38,7 +42,15 @@ public class GameMapper {
             game.setPlayer2(toPlayer(gameEntity.getPlayer2()));
         }
 
+        game.setCreatedAt(gameEntity.getCreatedAt());
+
         return game;
+    }
+
+    public List<LeaderBoard> toLeaderBoard(List<DtoLeaderBoard> leaderBoard){
+        return leaderBoard.stream()
+                .map(dto -> new LeaderBoard(dto.userId(), dto.winRate()))
+                .toList();
     }
 
     private PlayerEmbeddable toPlayerEmbeddable(Player player) {
